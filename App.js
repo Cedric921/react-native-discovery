@@ -1,21 +1,22 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 
+const Person = ({ name, lastName }) => (
+	<View style={styles.textBlock}>
+		<Text style={styles.text}>Hey i'm {name}</Text>
+		<Text style={styles.text}>{lastName}</Text>
+	</View>
+);
+
 export default function App() {
+	const name = 'Cedric VB';
 	return (
 		<SafeAreaView>
 			<View style={styles.wrapper}>
-				<View style={styles.textBlock}>
-					<Text>Text One</Text>
-					<Text>Text One</Text>
-				</View>
-				<View style={styles.textBlock}>
-					<Text>Text Two</Text>
-					<Text>Text Two</Text>
-					<Text>Text Two</Text>
-					<Text>Text Two</Text>
-				</View>
-				<Text style={styles.textTwo}>Text Two</Text>
+				<Person name={'Cedric'} lastName={'Karungu'} />
+				<Person name={'Arick'} lastName={'Ndeko'} />
+				<Person name={'Cedric'} lastName={'Karungu'} />
+
 				<StatusBar style='auto' />
 			</View>
 		</SafeAreaView>
@@ -36,5 +37,8 @@ const styles = StyleSheet.create({
 		fontFamily: 'Cochin',
 		fontWeight: '700',
 		padding: 8,
+	},
+	text: {
+		color: 'white',
 	},
 });
