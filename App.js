@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Button } from 'react-native';
 
 const Person = ({ name, lastName }) => (
 	<View style={styles.textBlock}>
@@ -9,16 +9,20 @@ const Person = ({ name, lastName }) => (
 );
 
 export default function App() {
-	const name = 'Cedric VB';
 	return (
 		<SafeAreaView>
 			<View style={styles.wrapper}>
 				<Person name={'Cedric'} lastName={'Karungu'} />
 				<Person name={'Arick'} lastName={'Ndeko'} />
 				<Person name={'Cedric'} lastName={'Karungu'} />
-
-				<StatusBar style='auto' />
 			</View>
+			<Button
+				title='Increase'
+				color={'red'}
+				disabled={false}
+				accessibilityLabel='Learn more'
+			/>
+			<StatusBar style='auto' />
 		</SafeAreaView>
 	);
 }
