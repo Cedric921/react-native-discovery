@@ -4,75 +4,60 @@ import {
 	Text,
 	View,
 	SafeAreaView,
-	Button,
-	TextInput,
+	ScrollView,
+	FlatList,
 } from 'react-native';
 import React from 'react';
 
-const Person = ({ name }) => (
+const data = [
+	{ id: '1', name: 'cedric', age: 12 },
+	{ id: '2', name: 'James', age: 12 },
+	{ id: '3', name: 'Patrick', age: 12 },
+	{ id: '4', name: 'Arick', age: 12 },
+	{ id: '5', name: 'Patrick', age: 12 },
+	{ id: '6', name: 'Patrick', age: 12 },
+	{ id: '7', name: 'Larry', age: 12 },
+	{ id: '8', name: 'Larry', age: 12 },
+	{ id: '9', name: 'Rodrigue', age: 12 },
+	{ id: '10', name: 'Rodrigue', age: 12 },
+	{ id: '11', name: 'cedric', age: 12 },
+	{ id: '12', name: 'cedric', age: 12 },
+	{ id: '13', name: 'Patrick', age: 12 },
+	{ id: '14', name: 'Arick', age: 12 },
+	{ id: '15', name: 'Patrick', age: 12 },
+	{ id: '16', name: 'Patrick', age: 12 },
+	{ id: '17', name: 'Larry', age: 12 },
+	{ id: '18', name: 'Larry', age: 12 },
+	{ id: '19', name: 'Rodrigue', age: 12 },
+	{ id: '20', name: 'Rodrigue', age: 12 },
+];
+
+const renderItem = ({ item }) => (
 	<View style={styles.textBlock}>
-		<Text style={styles.text}>Hey i'm {name}</Text>
+		<Text style={styles.textTwo}>{item.name}</Text>
+		<Text style={styles.textSecondary}>{item.age} year </Text>
 	</View>
 );
 
 export default function App() {
-	const [count, setCount] = React.useState(0);
-	const [names, setNames] = React.useState([]);
-	const [input, setInput] = React.useState('');
+	const [users, setUsers] = React.useState(data);
+
 	return (
 		<SafeAreaView>
-			<View style={styles.wrapper}>
-				{names.map((name, i) => (
-					<Person key={i} name={name} />
-				))}
-			</View>
-			<View
-				style={{
-					flexDirection: 'row',
-					alignItems: 'center',
-					justifyContent: 'start',
-				}}
-			>
-				<TextInput
-					style={styles.input}
-					value={input}
-					placeholder='Enter your name'
-					onChangeText={(value) => setInput(value)}
-				/>
-				<Button
-					title='Save'
-					color={'#0009'}
-					disabled={false}
-					accessibilityLabel='Learn more'
-					onPress={() => setNames((ns) => [...ns, input])}
-				/>
-			</View>
-			<Text style={styles.count}>{count}</Text>
-			<View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-				<Button
-					title='decrease'
-					color={'red'}
-					disabled={false}
-					accessibilityLabel='Learn more'
-					onPress={() => setCount((c) => c - 1)}
-				/>
-				<Button
-					title='Increase'
-					color={'green'}
-					disabled={false}
-					accessibilityLabel='Learn more'
-					onPress={() => setCount((c) => c + 1)}
-				/>
-			</View>
+			<FlatList
+				data={users}
+				renderItem={renderItem}
+				keyExtractor={(u) => u.id}
+			/>
 			<StatusBar style='auto' />
 		</SafeAreaView>
 	);
 }
 
 const styles = StyleSheet.create({
-	wrapper: { flexDirection: 'column' },
+	wrapper: { height: '100vh' },
 	textBlock: {
-		backgroundColor: 'green',
+		backgroundColor: '#144a',
 		padding: 8,
 		margin: 4,
 		borderRadius: 5,
@@ -80,18 +65,18 @@ const styles = StyleSheet.create({
 	textTwo: {
 		fontSize: 20,
 		textAlign: 'center',
-		fontFamily: 'Cochin',
 		fontWeight: '700',
 		padding: 8,
-	},
-	text: {
 		color: 'white',
 	},
-	count: {
-		fontSize: 24,
+	textSecondary: {
+		fontSize: 16,
 		textAlign: 'center',
-		margin: 12,
+		fontWeight: '500',
+		padding: 4,
+		color: 'white',
 	},
+
 	input: {
 		marginVertical: 8,
 		marginHorizontal: 8,
