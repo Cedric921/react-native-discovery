@@ -6,87 +6,70 @@ import {
 	SafeAreaView,
 	ScrollView,
 	FlatList,
+	TextInput,
+	Button,
 } from 'react-native';
 import React from 'react';
 
-const data = [
-	{ id: '1', name: 'cedric', age: 12 },
-	{ id: '2', name: 'James', age: 12 },
-	{ id: '3', name: 'Patrick', age: 12 },
-	{ id: '4', name: 'Arick', age: 12 },
-	{ id: '5', name: 'Patrick', age: 12 },
-	{ id: '6', name: 'Patrick', age: 12 },
-	{ id: '7', name: 'Larry', age: 12 },
-	{ id: '8', name: 'Larry', age: 12 },
-	{ id: '9', name: 'Rodrigue', age: 12 },
-	{ id: '10', name: 'Rodrigue', age: 12 },
-	{ id: '11', name: 'cedric', age: 12 },
-	{ id: '12', name: 'cedric', age: 12 },
-	{ id: '13', name: 'Patrick', age: 12 },
-	{ id: '14', name: 'Arick', age: 12 },
-	{ id: '15', name: 'Patrick', age: 12 },
-	{ id: '16', name: 'Patrick', age: 12 },
-	{ id: '17', name: 'Larry', age: 12 },
-	{ id: '18', name: 'Larry', age: 12 },
-	{ id: '19', name: 'Rodrigue', age: 12 },
-	{ id: '20', name: 'Rodrigue', age: 12 },
-];
-
-const renderItem = ({ item }) => (
-	<View style={styles.textBlock}>
-		<Text style={styles.textTwo}>{item.name}</Text>
-		<Text style={styles.textSecondary}>{item.age} year </Text>
-	</View>
-);
-
 export default function App() {
-	const [users, setUsers] = React.useState(data);
+	const [productInput, setProductInput] = React.useState('');
+	const [products, setProducts] = React.useState([]);
 
+	const handleAddProduct = () => {
+		setProducts((prev) => [...prev, productInput]);
+		setProductInput('');
+	};
 	return (
 		<SafeAreaView>
-			<FlatList
-				data={users}
-				renderItem={renderItem}
-				keyExtractor={(u) => u.id}
-			/>
-			<StatusBar style='auto' />
+			<View style={styles.container}>
+				<View style={styles.inputContainer}>
+					<TextInput
+						style={styles.textInput}
+						placeholder='write something'
+						value={productInput}
+						onChangeText={(t) => setProductInput(t)}
+					/>
+					<Button title='Valider' onPress={handleAddProduct} />
+				</View>
+				<ScrollView>
+					{products.map((product, i) => (
+						<Text key={i} style={styles.product}>
+							#-{i + 1 + ' '} {product}
+						</Text>
+					))}
+				</ScrollView>
+			</View>
 		</SafeAreaView>
 	);
 }
 
 const styles = StyleSheet.create({
-	wrapper: { height: '100vh' },
-	textBlock: {
-		backgroundColor: '#144a',
-		padding: 8,
-		margin: 4,
-		borderRadius: 5,
+	container: {
+		padding: 40,
+		paddingTop: 6,
 	},
-	textTwo: {
-		fontSize: 20,
-		textAlign: 'center',
-		fontWeight: '700',
-		padding: 8,
-		color: 'white',
+	inputContainer: {
+		flexDirection: 'row',
+		paddingTop: 20,
+		marginBottom: 8,
 	},
-	textSecondary: {
-		fontSize: 16,
-		textAlign: 'center',
-		fontWeight: '500',
-		padding: 4,
-		color: 'white',
-	},
-
-	input: {
-		marginVertical: 8,
-		marginHorizontal: 8,
-		paddingVertical: 10,
-		paddingHorizontal: 6,
-		borderRadius: 2,
-		fontSize: 16,
+	textInput: {
+		borderColor: '#0003',
 		borderWidth: 1,
-		borderColor: '#0005',
-		backgroundColor: '#0001',
+		fontSize: 18,
+		padding: 6,
+		borderRadius: 4,
 		flex: 1,
+	},
+	button: {
+		border: 2,
+	},
+	product: {
+		shadowColor: '#0003',
+		backgroundColor: '#0001',
+		borderRadius: 4,
+		marginVertical: 6,
+		padding: 10,
+		fontSize: 18,
 	},
 });
