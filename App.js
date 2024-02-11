@@ -10,14 +10,17 @@ import {
 	Button,
 } from 'react-native';
 import React from 'react';
+import Product from './components/product';
 
 export default function App() {
 	const [productInput, setProductInput] = React.useState('');
 	const [products, setProducts] = React.useState([]);
 
 	const handleAddProduct = () => {
-		setProducts((prev) => [...prev, productInput]);
+		const id = Date.now().toString();
+		setProducts((prev) => [...prev, { id, name: productInput }]);
 		setProductInput('');
+		console.log(products);
 	};
 	return (
 		<SafeAreaView>
@@ -31,13 +34,10 @@ export default function App() {
 					/>
 					<Button title='Valider' onPress={handleAddProduct} />
 				</View>
-				<ScrollView>
-					{products.map((product, i) => (
-						<Text key={i} style={styles.product}>
-							#-{i + 1 + ' '} {product}
-						</Text>
-					))}
-				</ScrollView>
+				<FlatList
+					data={products}
+					renderItem={({ item }) => <Product product={item} />}
+				/>
 			</View>
 		</SafeAreaView>
 	);
@@ -63,13 +63,5 @@ const styles = StyleSheet.create({
 	},
 	button: {
 		border: 2,
-	},
-	product: {
-		shadowColor: '#0003',
-		backgroundColor: '#0001',
-		borderRadius: 4,
-		marginVertical: 6,
-		padding: 10,
-		fontSize: 18,
 	},
 });
