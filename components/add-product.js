@@ -6,12 +6,25 @@ export default function AddProduct({ addProduct }) {
 
 	const handleAddProduct = () => {
 		if (productInput.length < 3) {
-			Alert.alert('Error', 'The product name must have at least 3 letters', [
+			Alert.alert(
+				'Error',
+				'The product name must have at least 3 letters',
+				[
+					{
+						text: 'Cancel',
+						onPress: () => console.info('canceled'),
+						style: 'destructive',
+					},
+					{
+						text: 'Accept',
+						onPress: () => console.warn('denied'),
+						style: 'cancel',
+					},
+				],
 				{
-					text: 'Accept',
-					onPress: () => console.warn('denied'),
-				},
-			]);
+					cancelable: true,
+				}
+			);
 			return;
 		}
 		const id = Date.now().toString();
