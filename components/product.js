@@ -1,8 +1,8 @@
-import { StyleSheet, Text, Touchable, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
-export default function Product({ product }) {
+export default function Product({ product, onRemove }) {
 	return (
-		<TouchableOpacity onPress={() => console.log('clicked')}>
+		<TouchableOpacity onPress={() => onRemove(product.id)}>
 			<Text style={styles.product}>#- {product.name}</Text>
 		</TouchableOpacity>
 	);

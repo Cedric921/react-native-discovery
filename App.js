@@ -9,13 +9,18 @@ export default function App() {
 	const handleAddProduct = (data) => {
 		setProducts((prev) => [...prev, data]);
 	};
+
+	const handleRemove = (id) =>
+		setProducts((prev) => prev.filter((el) => el.id !== id));
 	return (
 		<SafeAreaView>
 			<View style={styles.container}>
 				<AddProduct addProduct={handleAddProduct} />
 				<FlatList
 					data={products}
-					renderItem={({ item }) => <Product product={item} />}
+					renderItem={({ item }) => (
+						<Product product={item} onRemove={handleRemove} />
+					)}
 				/>
 			</View>
 		</SafeAreaView>

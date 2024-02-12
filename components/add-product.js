@@ -1,10 +1,19 @@
 import React from 'react';
-import { Button, StyleSheet, TextInput, View } from 'react-native';
+import { Alert, Button, StyleSheet, TextInput, View } from 'react-native';
 
 export default function AddProduct({ addProduct }) {
 	const [productInput, setProductInput] = React.useState('');
 
 	const handleAddProduct = () => {
+		if (productInput.length < 3) {
+			Alert.alert('Error', 'The product name must have at least 3 letters', [
+				{
+					text: 'Accept',
+					onPress: () => console.warn('denied'),
+				},
+			]);
+			return;
+		}
 		const id = Date.now().toString();
 		addProduct({ id, name: productInput });
 		setProductInput('');
