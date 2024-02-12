@@ -1,7 +1,11 @@
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, Touchable, TouchableOpacity } from 'react-native';
 
 export default function Product({ product }) {
-	return <Text style={styles.product}>#- {product.name}</Text>;
+	return (
+		<TouchableOpacity onPress={() => console.log('clicked')}>
+			<Text style={styles.product}>#- {product.name}</Text>
+		</TouchableOpacity>
+	);
 }
 
 const styles = StyleSheet.create({
